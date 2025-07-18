@@ -1,0 +1,101 @@
+<form id="contactForm">
+  <label>Name:</label>
+  <input type="text" name="name" required><br>
+
+  <label>Email:</label>
+  <input type="email" name="email" required><br>
+
+  <input type="submit" value="Submit">
+</form>
+form {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"] {
+  padding: 8px;
+  font-size: 1rem;
+}
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  const email = e.target.email.value;
+  const name = e.target.name.value;
+
+  if (!name || !email) {
+    alert("All fields are required!");
+    e.preventDefault();
+    return;
+  }
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!emailPattern.test(email)) {
+    alert("Enter a valid email.");
+    e.preventDefault();
+  }
+});
+<div class="container">
+  <nav>Navigation</nav>
+  <main>Main Content</main>
+  <aside>Sidebar</aside>
+</div>
+.container {
+  display: grid;
+  grid-template-areas: 
+    "nav nav"
+    "main aside";
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+nav {
+  grid-area: nav;
+  background-color: lightblue;
+}
+
+main {
+  grid-area: main;
+  background-color: lightgreen;
+}
+
+aside {
+  grid-area: aside;
+  background-color: lightcoral;
+}
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-areas: 
+      "nav"
+      "main"
+      "aside";
+    grid-template-columns: 1fr;
+  }
+}
+<div>
+  <input type="text" id="taskInput" placeholder="Add a task">
+  <button onclick="addTask()">Add</button>
+  <ul id="taskList"></ul>
+</div>
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
+
+  if (taskText === "") return;
+
+  const li = document.createElement("li");
+  li.textContent = taskText;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Remove";
+  btn.onclick = () => li.remove();
+
+  li.appendChild(btn);
+  document.getElementById("takList").appendChild(li);
+
+  taskInput.value = "";
+}
