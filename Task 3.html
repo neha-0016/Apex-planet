@@ -1,0 +1,55 @@
+/* Base styles for mobile */
+body {
+  font-size: 16px;
+  padding: 10px;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+  body {
+    font-size: 18px;
+    padding: 20px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  body {
+    font-size: 20px;
+    padding: 40px;
+  }
+}
+<p id="question">What is 2 + 2?</p>
+<button onclick="checkAnswer(4)">4</button>
+<button onclick="checkAnswer(5)">5</button>
+<p id="result"></p>
+
+<script>
+  function checkAnswer(answer) {
+    const result = document.getElementById("result");
+    result.textContent = answer === 4 ? "Correct!" : "Try Again.";
+  }
+</script>
+
+<img id="carousel" src="image1.jpg" width="300">
+<button onclick="nextImage()">Next</button>
+
+<script>
+  const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+  let index = 0;
+
+  function nextImage() {
+    index = (index + 1) % images.length;
+    document.getElementById("carousel").src = images[index];
+  }
+</script>
+<button onclick="getJoke()">Get Joke</button>
+<p id="joke"></p>
+
+<script>
+  async function getJoke() {
+    const res = await fetch('https://official-joke-api.appspot.com/random_joke');
+    const data = await res.json();
+    document.getElementById("joke").textContent = `${data.setup} - ${data.punchline}`;
+  }
+</script>
