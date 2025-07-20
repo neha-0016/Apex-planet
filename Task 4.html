@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <section>
+    <h1>Welcome to My Portfolio</h1>
+  </section>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+nav {
+  background: #00796b;
+  padding: 10px;
+}
+nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+}
+section {
+  padding: 20px;
+}
+<input type="text" id="taskInput" placeholder="Add a task">
+<button onclick="addTask()">Add</button>
+<ul id="taskList"></ul>
+
+<script>
+  let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  function renderTasks() {
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
+    taskList.forEach((task, index) => {
+      list.innerHTML += `<li>${task} <button onclick="removeTask(${index})">❌</button></li>`;
+    });
+  }
+
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    taskList.push(input.value);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    input.value = "";
+    renderTasks();
+  }
+
+  function removeTask(index) {
+    taskList.splice(index, 1);
+    localStorage.setItem("tasks", JSON.stringify(taskList));
+    renderTasks();
+  }
+
+  renderTasks();
+</script>
+<select id="categoryFilter" onchange="filterProducts()">
+  <option value="All">All</option>
+  <option value="Electronics">Electronics</option>
+  <option value="Books">Books</option>
+</select>
+
+<select id="sortOption" onchange="sortProducts()">
+  <option value="default">Sort by</option>
+  <option value="priceLow">Price: Low to High</option>
+  <option value="priceHigh">Price: High to Low</option>
+</select>
+
+<div id="productList"></div>
+
+<script>
+const products = [
+  { name: "Phone", category: "Electronics", price: 600 },
+  { name: "Laptop", category: "Electronics", price: 1200 },
+  { name: "Book", category: "Books", price: 30 }
+];
+
+let filtered = [...products];
+
+function display(productsToShow) {
+  const list = document.getElementById("productList");
+  list.innerHTML = "";
+  productsToShow.forEach(p => {
+    list.innerHTML += `<div>${p.name} - $${p.price}</div>`;
+  });
+}
+
+function filterProducts() {
+  const cat = document.getElementById("categoryFilter").value;
+  filtered = cat === "All" ? [...products] : products.filter(p => p.category === cat);
+  display(filtered);
+}
+
+function sortProducts() {
+  const sort = document.getElementById("sortOption").value;
+  if (sort === "priceLow") filtered.sort((a, b) => a.price - b.price);
+  else if (sort === "priceHigh") filtered.sort((a, b) => b.price - a.price);
+  display(filtered);
+}
+
+display(filtered);
+</script>
