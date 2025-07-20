@@ -1,0 +1,60 @@
+portfolio/
+├── index.html
+├── style.css
+├── script.js
+├── images/
+│   └── profile.jpg
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>John Doe</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <img src="images/profile.jpg" alt="Profile" loading="lazy" />
+    <h2>About Me</h2>
+    <p>I'm a web developer passionate about building responsive web applications.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Blog Website</h3>
+      <p>Dynamic blog with login and post management features.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 John Doe</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;line-height:1.6;padding:20px}header{background:#0077cc;color:#fff;padding:1rem;text-align:center}nav a{margin:0 10px;color:#fff;text-decoration:none}section{margin:2rem 0}img{max-width:100%;height:auto;border-radius:8px}.project-card{background:#f0f0f0;padding:1rem;border-radius:8px;margin-top:1rem}form{display:flex;flex-direction:column;gap:10px}input,textarea{padding:10px;border:1px solid #ccc;border-radius:5px}button{padding:10px;background:#0077cc;color:#fff;border:none;border-radius:5px;cursor:pointer}@media(max-width:600px){header,section,footer{padding:1rem}}
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  alert('Message sent successfully!');
+});
